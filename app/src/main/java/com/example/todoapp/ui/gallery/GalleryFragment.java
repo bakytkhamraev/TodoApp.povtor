@@ -14,8 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class GalleryFragment extends Fragment implements OnItemClickListener {
 
     private GalleryViewModel galleryViewModel;
-    private GalleryAdapter adapter= new GalleryAdapter();
-
+    private GalleryAdapter adapter;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         adapter=new GalleryAdapter();

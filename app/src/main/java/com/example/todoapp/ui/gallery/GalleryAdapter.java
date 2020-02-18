@@ -12,16 +12,14 @@ import com.example.todoapp.R;
 import java.util.ArrayList;
 
 class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
-    ArrayList<String> names=new ArrayList<>();
-    public GalleryAdapter(){
-        names.add("Bob");
-        names.add("John");
-        names.add("Scarlett");
-        names.add("Annie");
-        names.add("Josh");
-        names.add("Alex");
-
-    }
+    ArrayList<String> names = new ArrayList<String>(){{
+        add("Bob");
+        add("John");
+        add("Scarlett");
+        add("Annie");
+        add("Josh");
+        add("Alex");
+    }};
 
     @NonNull
     @Override
