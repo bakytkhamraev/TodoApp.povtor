@@ -19,6 +19,7 @@ class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
         add("Annie");
         add("Josh");
         add("Alex");
+        add("Alexa");
     }};
 
     @NonNull
