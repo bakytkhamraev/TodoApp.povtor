@@ -14,13 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 public class GalleryFragment extends Fragment implements OnItemClickListener {
 
     private GalleryViewModel galleryViewModel;
-    private GalleryAdapter adapter;
+    private GalleryAdapter userAdapter;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        adapter=new GalleryAdapter();
+        userAdapter =new GalleryAdapter();
         RecyclerView recyclerView = new RecyclerView(getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(userAdapter);
 
         return recyclerView;
 
