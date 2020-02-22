@@ -11,7 +11,7 @@ import com.example.todoapp.R;
 
 public class GalleryViewHolder extends RecyclerView.ViewHolder {
     TextView textView;
-  
+
     public GalleryViewHolder(@NonNull View itemView) {
         super(itemView);
         textView=itemView.findViewById(R.id.textView);

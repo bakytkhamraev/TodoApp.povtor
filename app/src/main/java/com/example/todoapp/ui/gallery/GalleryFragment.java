@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class GalleryFragment extends Fragment implements OnItemClickListener {
+public class GalleryFragment extends Fragment  {
 
     private GalleryViewModel galleryViewModel;
     private GalleryAdapter userAdapter;
@@ -32,8 +32,5 @@ public class GalleryFragment extends Fragment implements OnItemClickListener {
 
     }
 
-    @Override
-    public void onItemClick(String s) {
 
-    }
 }
