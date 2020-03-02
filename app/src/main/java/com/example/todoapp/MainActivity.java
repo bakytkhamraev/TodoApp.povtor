@@ -1,6 +1,7 @@
 package com.example.todoapp;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -44,11 +45,15 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private final int RC_WRITE_EXTERNAL=101;
     EditText editText;
+    int sizeOfText;
+    EditText editText2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         boolean isShown=Prefs.getInstance(this).isShown();
+        editText2=findViewById(R.id.editText);
         if (!isShown){startActivity(new Intent(this, OnBoardActivity.class));
         finish();
         return;
@@ -114,13 +119,6 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==RESULT_OK&&resultCode==100){
-       String title= data.getStringExtra("title");
-    }
-}
     @AfterPermissionGranted(RC_WRITE_EXTERNAL)
     public void initFile(String notes){
         String permission= Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -150,4 +148,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-}
+    }
+
+

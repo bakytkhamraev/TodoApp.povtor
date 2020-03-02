@@ -19,6 +19,11 @@ public class Work implements Serializable {
 
     }
 
+    public Work(String title, String desc) {
+        this.title = title;
+        this.desc = desc;
+    }
+
     public long getId() {
         return id;
     }

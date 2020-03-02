@@ -1,30 +1,40 @@
 package com.example.todoapp.ui.home;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.todoapp.App;
+import com.example.todoapp.FormActivity;
 import com.example.todoapp.R;
 import com.example.todoapp.models.Work;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment  {
     private WorkAdapter adapter;
     private List<Work> list;
+
+
+
+
+
+
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -43,6 +53,17 @@ public class HomeFragment extends Fragment {
         list= new ArrayList<>();
         adapter=new WorkAdapter(list);
         recyclerView.setAdapter(adapter);
+        adapter.onItemClick(new OnItemClick() {
+            @Override
+            public void onItemClick(int adapterPosition) {
+                Work work=list.get(adapterPosition);
+                Intent intent=new Intent(getContext(), FormActivity.class);
+                intent.putExtra("newWork",work);
+                startActivity(intent);
+
+            }
+        });
+
         App.getDataBase().workDao().getAll().observe(this, new Observer<List<Work>>() {
             @Override
             public void onChanged(List<Work> works) {
@@ -52,5 +73,10 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
+
+
     }
+
+
 }

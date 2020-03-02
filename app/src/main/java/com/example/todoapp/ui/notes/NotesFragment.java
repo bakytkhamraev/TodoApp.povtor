@@ -1,5 +1,7 @@
 package com.example.todoapp.ui.notes;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -23,6 +25,8 @@ import java.io.IOException;
 public class NotesFragment extends Fragment {
     EditText editText;
 
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -33,6 +37,13 @@ public class NotesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         editText=view.findViewById(R.id.editText);
+        Intent intent=getActivity().getIntent();
+        if(intent!=null){
+            int size = intent.getIntExtra("sizeOfText",0);
+            editText.setTextSize(size);
+
+        }
+
     }
 
     @Override
@@ -54,4 +65,6 @@ public class NotesFragment extends Fragment {
              e.printStackTrace();
          }
      }
+
+
 }
