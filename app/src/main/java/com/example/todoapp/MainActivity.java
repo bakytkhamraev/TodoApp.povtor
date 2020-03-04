@@ -3,8 +3,10 @@ package com.example.todoapp;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 
+import com.example.todoapp.ui.home.TransitionActivity;
 import com.example.todoapp.ui.onBoard.OnBoardActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -18,6 +20,9 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -32,10 +37,13 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.InterruptedByTimeoutException;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -44,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private final int RC_WRITE_EXTERNAL=101;
-    EditText editText;
-    int sizeOfText;
-    EditText editText2;
+    EditText editText,editText2;
+    TextView nameHeader, emailHeader;
+
 
 
     @Override
@@ -54,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         boolean isShown=Prefs.getInstance(this).isShown();
         editText2=findViewById(R.id.editText);
+        nameHeader=findViewById(R.id.nameHeader);
+        nameHeader=findViewById(R.id.emailHeader);
+
+
         if (!isShown){startActivity(new Intent(this, OnBoardActivity.class));
         finish();
         return;
@@ -83,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
         initFile("");
 
+
     }
 
 
@@ -105,7 +118,10 @@ public class MainActivity extends AppCompatActivity {
                 Prefs.getInstance(this).delete();
                 startActivity(new Intent(this, OnBoardActivity.class));
             case (R.id.action_size) :
-                startActivity(new Intent(MainActivity.this,SizeActivity.class));
+                startActivityForResult(new Intent(MainActivity.this,SizeActivity.class),202);
+            case R.id.imageView:
+                startActivity(new Intent(MainActivity.this,ProfileActivity.class));
+
         break;
         }
 
@@ -141,13 +157,41 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        editText=findViewById(R.id.zametki_edit_text);
         initFile(editText.getText().toString());
         super.onBackPressed();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Fragment navHostFragment=getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        for (Fragment fragment:navHostFragment.getChildFragmentManager().getFragments()) {
+            fragment.onActivityResult(requestCode,resultCode,data);
+        }
+        if(requestCode==303){
+            nameHeader.setText(data.getStringExtra("name"));
+            emailHeader.setText(data.getStringExtra("email"));
+        }
+    }
+    public void animateIntent(View view) {
 
+        Intent intent = new Intent(this, TransitionActivity.class);
+        String transitionName = getString(R.string.transition_string);
+        View start = view.findViewById(R.id.underRecBtn);
+
+        ActivityOptionsCompat options=ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+                start,   // Starting view
+                transitionName    // The String
+        );
+        //Start the Intent
+        ActivityCompat.startActivity(this, intent, options.toBundle());
 
     }
+
+    public void onProfileClick(View view) {
+        startActivity(new Intent(this,ProfileActivity.class));
+    }
+
+}
 
 

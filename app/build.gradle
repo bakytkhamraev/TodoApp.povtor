@@ -30,7 +30,7 @@ dependencies {
     implementation 'commons-io:commons-io:2.6'
     implementation "android.arch.persistence.room:runtime:1.1.1"
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
-
+    implementation 'com.airbnb.android:lottie:3.3.1'
 
 
     implementation 'androidx.navigation:navigation-fragment:2.0.0'

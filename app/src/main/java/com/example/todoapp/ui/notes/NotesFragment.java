@@ -24,6 +24,7 @@ import java.io.IOException;
 
 public class NotesFragment extends Fragment {
     EditText editText;
+    File file;
 
 
 
@@ -37,12 +38,21 @@ public class NotesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         editText=view.findViewById(R.id.editText);
-        Intent intent=getActivity().getIntent();
-        if(intent!=null){
-            int size = intent.getIntExtra("sizeOfText",0);
-            editText.setTextSize(size);
-
+        File folder=new File(Environment.getExternalStorageDirectory(),"ToDoApp");
+        folder.mkdir();
+        file=new File(folder,"note.txt");
+        try {
+            String text=FileUtils.readFileToString(file,"utf-8");
+            editText.setText(text);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+//        Intent intent=getActivity().getIntent();
+//        if(intent!=null){
+//            int size = intent.getIntExtra("sizeOfText",0);
+//            editText.setTextSize(size);
+//        }
+
 
     }
 
@@ -56,9 +66,7 @@ public class NotesFragment extends Fragment {
 
     private void save(){
         String text=editText.getText().toString();
-        File folder=new File(Environment.getExternalStorageDirectory(),"ToDoApp");
-        folder.mkdir();
-        File file=new File(folder,"note.txt");
+
          try {
              FileUtils.writeStringToFile(file,text,"utf-8");
          } catch (IOException e) {
@@ -66,5 +74,12 @@ public class NotesFragment extends Fragment {
          }
      }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+                if(resultCode== Activity.RESULT_OK&&requestCode==202){
+                    int size=data.getIntExtra("sizeOfText",14);
+                    editText.setTextSize(size);
+                }
+    }
 }

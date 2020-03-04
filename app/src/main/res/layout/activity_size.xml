@@ -15,8 +15,7 @@
         android:id="@+id/radio_group_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:orientation="vertical"/>
+        android:orientation="vertical">
 
     <RadioButton
         android:id="@+id/size_14"
@@ -39,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:text="28"/>
+    </RadioGroup>
 
 
 </LinearLayout>

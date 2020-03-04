@@ -1,15 +1,18 @@
 package com.example.todoapp.ui.home;
 
-import android.app.Activity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
@@ -28,14 +31,7 @@ import java.util.List;
 public class HomeFragment extends Fragment  {
     private WorkAdapter adapter;
     private List<Work> list;
-
-
-
-
-
-
-
-
+    Button button;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -45,7 +41,7 @@ public class HomeFragment extends Fragment  {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView recyclerView=view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -63,6 +59,7 @@ public class HomeFragment extends Fragment  {
 
             }
         });
+        button=view.findViewById(R.id.underRecBtn);
 
         App.getDataBase().workDao().getAll().observe(this, new Observer<List<Work>>() {
             @Override
@@ -72,11 +69,18 @@ public class HomeFragment extends Fragment  {
                 adapter.notifyDataSetChanged();
             }
         });
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                animateIntent(view);
+//            }
+//        });
 
 
 
 
     }
+
 
 
 }
