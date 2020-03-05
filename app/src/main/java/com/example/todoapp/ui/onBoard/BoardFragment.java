@@ -48,18 +48,18 @@ public class BoardFragment extends Fragment {
         int pos=getArguments().getInt("pos");
         switch (pos){
             case 0:
-                textTitle.setText("Привет");
-                imageView.setImageResource(R.drawable.onboard_page1);
+                textTitle.setText("Хей");
+                imageView.setImageResource(R.drawable.one);
                 break;
             case 1:
-                textTitle.setText("Как дела?");
-                imageView.setImageResource(R.drawable.onboard_page2);
+                textTitle.setText("Хай");
+                imageView.setImageResource(R.drawable.two);
 
                 break;
 
             case 2:
-                textTitle.setText("Отлично");
-                imageView.setImageResource(R.drawable.onboard_page3);
+                textTitle.setText("Юхоу");
+                imageView.setImageResource(R.drawable.three);
                 btnStart.setVisibility(View.VISIBLE);
                 btnStart.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -13,11 +13,9 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_marginBottom="12dp"
-        android:hint="Title"
         android:textColorHint="@color/colorPrimary"/>
     <EditText
         android:id="@+id/editDesc"
-        android:hint="Description"
         android:background="@drawable/bg_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,7 +28,7 @@
         android:text="Save"
         android:textColor="#fff"
         android:onClick="onClick"
-        android:background="@drawable/bg_button"
+        android:background="#000"
         />
 
 

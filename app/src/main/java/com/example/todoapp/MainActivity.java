@@ -29,6 +29,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -69,6 +70,13 @@ public class MainActivity extends AppCompatActivity {
         if (!isShown){startActivity(new Intent(this, OnBoardActivity.class));
         finish();
         return;
+        }
+
+        if (FirebaseAuth.getInstance().getCurrentUser()==null){
+            startActivity(new Intent(this, PhoneActivity.class));
+            finish();
+            return;
+
         }
 
         setContentView(R.layout.activity_main);
